@@ -8,8 +8,26 @@ class GeriSayimApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Geri naber',
-      theme: ThemeData.dark(),
+      title: 'Geri Sayım',
+      themeMode: ThemeMode.system, // Sistem temasına göre çalışır
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          titleTextStyle: TextStyle(color: Colors.black, fontSize: 20),
+        ),
+        textTheme: TextTheme(bodyLarge: TextStyle(color: Colors.black)),
+      ),
+      darkTheme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.black,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.black,
+          iconTheme: IconThemeData(color: Colors.white),
+          titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        textTheme: TextTheme(bodyLarge: TextStyle(color: Colors.white)),
+      ),
       home: AnaSayfa(),
       debugShowCheckedModeBanner: false,
     );
@@ -19,34 +37,26 @@ class GeriSayimApp extends StatelessWidget {
 class AnaSayfa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final textColor = Theme.of(context).textTheme.bodyLarge?.color;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text(
-          'Geri Sayım',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: Text('Geri Sayım'),
         actions: [
           IconButton(
-            icon: Icon(Icons.search, color: Colors.white),
-            onPressed: () {
-              print("Arama tıklandı");
-            },
+            icon: Icon(Icons.search),
+            onPressed: () => print("Arama tıklandı"),
           ),
           IconButton(
-            icon: Icon(Icons.filter_list, color: Colors.white),
-            onPressed: () {
-              print("Filtre tıklandı");
-            },
+            icon: Icon(Icons.filter_list),
+            onPressed: () => print("Filtre tıklandı"),
           ),
           IconButton(
-            icon: Icon(Icons.share, color: Colors.white),
-            onPressed: () {
-              print("Paylaş tıklandı");
-            },
+            icon: Icon(Icons.share),
+            onPressed: () => print("Paylaş tıklandı"),
           ),
           IconButton(
-            icon: Icon(Icons.settings, color: Colors.white),
+            icon: Icon(Icons.settings),
             onPressed: () {
               Navigator.push(
                 context,
@@ -58,8 +68,8 @@ class AnaSayfa extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          "İçerik buraya gelecek",
-          style: TextStyle(fontSize: 18, color: Colors.white),
+          "İçerik Alanı body",
+          style: TextStyle(fontSize: 18, color: textColor),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -75,112 +85,20 @@ class AnaSayfa extends StatelessWidget {
     );
   }
 }
-// 
-class SayacEklemeSayfasi extends StatelessWidget {
 
-
-
-
-
+class AyarlarSayfasi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Yeni Sayaç Ekle"),
-        backgroundColor: Colors.black,
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Sayaç Adı:",
-                style: TextStyle(fontSize: 18),
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: "Sayaç adını girin",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 16),
-              Text(
-                "Bitiş Zamanı:",
-                style: TextStyle(fontSize: 18),
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: "Bitiş zamanını girin",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 32),
-              ElevatedButton(
-                onPressed: () {
-                  print("Sayaç eklendi");
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                child: Text("Sayaç Ekle"),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: AppBar(title: Text('Ayarlar')),
+      body: Center(child: Text('Ayarlar Sayfası Body Alanı')),
     );
   }
 }
 
- 
- 
- 
- 
- class AyarlarSayfasi extends StatelessWidget {
+class SayacEklemeSayfasi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Ayarlar"),
-        backgroundColor: Colors.black,
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Ayar 1:",
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-              SwitchListTile(
-                title: Text("Ayar 1 Aktif", style: TextStyle(color: Colors.white)),
-                value: true,
-                onChanged: (bool value) {},
-                activeColor: Colors.blue,
-              ),
-              SizedBox(height: 16),
-              Text(
-                "Ayar 2:",
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-              SwitchListTile(
-                title: Text("Ayar 2 Aktif", style: TextStyle(color: Colors.white)),
-                value: false,
-                onChanged: (bool value) {},
-                activeColor: Colors.blue,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return Scaffold(appBar: AppBar(title: Text("Yeni Sayaç Ekle")));
   }
 }
